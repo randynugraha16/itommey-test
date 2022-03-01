@@ -1,5 +1,5 @@
 import express from "express";
-import { sort } from "./helpers/sort.js";
+import { bubbleSort } from "./helpers/sort.js";
 const port = 3011;
 
 const app = express();
@@ -14,11 +14,7 @@ app.get("/", (req, res) => {
 app.post("/itommey", (req, res, next) => {
   try {
     const { data } = req.body;
-    console.log("from body: ", data);
-
-    sort(data);
-
-    console.log("from function: ", data);
+    bubbleSort(data);
     res.json({ status: 200, message: "OK", data });
   } catch (err) {
     throw new Error(err);
@@ -34,7 +30,6 @@ app.use((req, res) => {
 
 app.listen(port, () => {
   console.log(`Server Running at http://localhost:${port}`);
-  console.log(process.env.NODE_ENV);
 });
 
 export const test = app;
